@@ -1,0 +1,90 @@
+[
+  {
+    "url": "https://www.espncricinfo.com/",
+    "x": 107.5,
+    "y": 281,
+    "width": 970,
+    "height": 250,
+    "keywords": [
+      "syndication"
+    ],
+    "tag": "IFRAME"
+  },
+  {
+    "url": "https://www.espncricinfo.com/",
+    "x": 784.5,
+    "y": 861.6875,
+    "width": 298,
+    "height": 50,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IFRAME"
+  },
+  {
+    "url": "https://www.espncricinfo.com/",
+    "x": 783.5,
+    "y": 927.6875,
+    "width": 300,
+    "height": 600,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IFRAME"
+  },
+  {
+    "url": "https://www.espncricinfo.com/",
+    "x": 80.5,
+    "y": 281,
+    "width": 1024,
+    "height": 278,
+    "keywords": [
+      "banner"
+    ],
+    "tag": "DIV"
+  },
+  {
+    "url": "https://www.espncricinfo.com/",
+    "x": 90.5,
+    "y": 291,
+    "width": 1004,
+    "height": 270,
+    "keywords": [
+      "banner"
+    ],
+    "tag": "DIV"
+  },
+  {
+    "url": "https://www.espncricinfo.com/",
+    "x": 107.5,
+    "y": 301,
+    "width": 970,
+    "height": 250,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "DIV"
+  },
+  {
+    "url": "https://www.espncricinfo.com/",
+    "x": 782.5,
+    "y": 909.6875,
+    "width": 302,
+    "height": 70,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "DIV"
+  },
+  {
+    "url": "https://www.espncricinfo.com/",
+    "x": 782.5,
+    "y": 995.6875,
+    "width": 302,
+    "height": 620,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "DIV"
+  }
+]
