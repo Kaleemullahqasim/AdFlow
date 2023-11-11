@@ -6,6 +6,20 @@ import json
 from time import sleep
 import string
 import time 
+from urllib.parse import urlparse
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import os
+import time
+import string
+
+
+def scroll_to_bottom(driver):
+    """Scroll to the bottom of the page."""
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    # Wait for the page to load completely
+    sleep(5)
 
 def sanitize_filename(filename):
     """Sanitize the filename by removing invalid characters and ensuring it ends with .png"""
@@ -42,7 +56,7 @@ def is_descendant(child_element, parent_elements):
 
 def mark_and_log_ads(driver, save_path):
     ads_data = []
-    parent_ad_elements = []  # List to keep track of parent ad elements
+    parent_ad_elements = []
 
     for tag in ad_tags:
         elements = driver.find_elements(By.TAG_NAME, tag)
@@ -55,9 +69,8 @@ def mark_and_log_ads(driver, save_path):
                         driver.execute_script("arguments[0].style.border='10px solid red'", element)
                         parent_ad_elements.append(element)
 
-                        # Get and log the ad's position
-                        rect = element.rect
-                        if rect['x'] > 0 and rect['y'] > 0 and rect['width'] > 0 and rect['height'] > 0:
+                        if element.is_displayed() and element.size['height'] > 0 and element.size['width'] > 0:
+                            rect = element.rect
                             position_data = {
                                 "url": driver.current_url,
                                 "x": rect['x'],
@@ -67,13 +80,27 @@ def mark_and_log_ads(driver, save_path):
                                 "keywords": keyword_matches,
                                 "tag": tag
                             }
-                            ads_data.append(position_data)
 
-                            # Take a screenshot of the ad
-                            screenshot_filename = sanitize_filename(f"{urlparse(driver.current_url).netloc}_{tag}_{int(time.time())}.png")
-                            element.screenshot(os.path.join(save_path, screenshot_filename))
-                        break  # No need to check other attributes if one matches
+                            # Extracting image URLs from img tags
+                            img_elements = element.find_elements(By.TAG_NAME, 'img')
+                            img_urls = [img.get_attribute('src') for img in img_elements if img.get_attribute('src')]
+                            print(f"Found {len(img_urls)} image URLs in img tags")  # Debug print
+
+                            # Extracting background images
+                            bg_image = driver.execute_script(
+                                "return window.getComputedStyle(arguments[0], null).backgroundImage.slice(4, -1).replace(/['\"]+/g, '');",
+                                element
+                            )
+                            if bg_image and bg_image != 'none':
+                                img_urls.append(bg_image)
+                                print(f"Found background image URL: {bg_image}")  # Debug print
+
+                            position_data['image_urls'] = img_urls
+                            ads_data.append(position_data)
+                        break
+
     return ads_data
+
 
 
 # Initialize the WebDriver
@@ -89,7 +116,8 @@ all_ads_data = []
 
 for url in urls_to_process:
     driver.get(url)
-    sleep(5)  # Wait for the page to load and ads to appear
+    sleep(5)  # Wait for initial page load
+    scroll_to_bottom(driver)  # Scroll to the end of the page
     ads_data = mark_and_log_ads(driver, save_path)
     all_ads_data.extend(ads_data)
 

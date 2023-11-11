@@ -2,6 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from time import sleep
 import json
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import os 
 
 # Initialize the WebDriver
 driver = webdriver.Chrome()
@@ -22,7 +25,6 @@ ad_keywords = [
     ]
 ad_tags = ['SCRIPT', 'IFRAME', 'DIV', 'IMG', 'INS', 'VIDEO', 'CANVAS', 'EMBED', 'OBJECT', 'SOURCE', 'SVG', 'TRACK',]
 
-# Function to mark ads and log their positions
 def mark_and_log_ads(driver):
     ads_data = []
     for tag in ad_tags:
@@ -35,7 +37,7 @@ def mark_and_log_ads(driver):
                     driver.execute_script("arguments[0].style.border='10px solid red'", element)
                     # Get and log the ad's position
                     rect = element.rect
-                    if rect['x'] > 0 and rect['y'] > 0 and rect['width'] > 0 and rect['height'] > 0:
+                    if rect['x'] > 5 and rect['y'] > 5 and rect['width'] > 5 and rect['height'] > 5:
                         position_data = {
                             "url": driver.current_url,
                             "x": rect['x'],
@@ -50,6 +52,8 @@ def mark_and_log_ads(driver):
                         element.screenshot(f"{driver.current_url}_{tag}.png")
                     break  # No need to check other attributes if one matches
     return ads_data
+
+
 
 # Process a list of URLs
 urls_to_process = ['https://www.espncricinfo.com/']  # Your list of URLs
