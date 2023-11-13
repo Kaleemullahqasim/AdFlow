@@ -10,7 +10,7 @@
       "doubleclick"
     ],
     "image_urls": [
-      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaQ2fFt68Y1Sw4yjbBjSfPa-LAlkIWZ1YZfeQm64-V0O6bZTKBgqnlTFTWeuCwODB12jBF-dsTd-rALVaXEcVg1yUPQl7w"
+      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaRRYH8rBfV5W1MYK27AaE5kce4V570lPCaz8gsPQWJgeYx66xSLZhy2NZFDg3rOwUCdRExOvRAB4A7_kZ2LbfeeymbnBw"
     ]
   },
   {
@@ -24,7 +24,7 @@
       "doubleclick"
     ],
     "image_urls": [
-      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaTTSJaMgisuBRgs7mEpvZiV8LLVJRf3NO94hdHYZKnsx7eAKcFR6R3_6ukLtBdp0wUGuvYPjyqGzAVk6OjJ9zjdtXhOjA"
+      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaTNHnrmqHO0zEeZtYZWwI5cYdtZM8qOaeZzd7jo7BI3lDvUhqfw_qfJMb0AUZIlKbll9tk47kEoe132EFaF1rLJYVt5JA"
     ]
   },
   {
@@ -39,19 +39,7 @@
     ],
     "image_urls": [
       "https://tpc.googlesyndication.com/simgad/14460308994970197992?sqp=4sqPyQQ7QjkqNxABHQAAtEIgASgBMAk4A0DwkwlYAWBfcAKAAQGIAQGdAQAAgD-oAQGwAYCt4gS4AV_FAS2ynT4&rs=AOga4qlUrG1D5wAlzcJvQGlfvay_Lzeakw",
-      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaStdaM1OVSpPq9pGBvp7C2zddJcmuWagRyNtL5FUJMfyodESoY0QopdG1OUwS9wO-7vsZ4_zugctidiFy84zOJiCUXPpg"
+      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaQGzCThcKskJp1esBF_umAp24PkA4_Tp1T9NcM6JtI6qIf8j2MAR_jh5Oo__wS3ohnmVSZT70_r_DWqJClufIGyQiuZFA"
     ]
-  },
-  {
-    "url": "https://weatherboy.com/",
-    "x": 846.046875,
-    "y": 909.6875,
-    "width": 60,
-    "height": 60,
-    "tag": "DIV",
-    "keyword": [
-      "banner"
-    ],
-    "image_urls": []
   }
 ]

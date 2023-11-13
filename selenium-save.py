@@ -16,8 +16,9 @@ import string
 import requests
 from selenium.common.exceptions import StaleElementReferenceException
 from ad_servers_list import known_ad_servers
-
-
+import requests
+import time
+from requests.exceptions import RequestException
 
 
 def domain_in_ad_servers(url, ad_servers):
@@ -93,9 +94,7 @@ def is_descendant(child_element, parent_elements, driver):
         # Re-find the child_element and try again, or handle it in another way
         return False
 
-import requests
-import time
-from requests.exceptions import RequestException
+
 
 def download_image(image_url, save_path, max_retries=5):
     if not domain_in_ad_servers(image_url, known_ad_servers):
@@ -163,8 +162,9 @@ def mark_and_log_ads(driver, save_path):
                         "width": rect['width'],
                         "height": rect['height'],
                         "tag": tag,
-                        "keyword": keyword_matches,
-                        "image_urls": []
+                        "keyword": keyword_matches, 
+                        "image_urls": [],
+                    
                     }
 
                     # Extracting image URLs
