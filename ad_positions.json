@@ -1,74 +1,57 @@
 [
   {
-    "url": "https://www.espncricinfo.com/",
-    "x": 107.5,
-    "y": 281,
-    "width": 970,
+    "url": "https://weatherboy.com/",
+    "x": 43.5,
+    "y": 794.609375,
+    "width": 737,
+    "height": 280,
+    "tag": "IFRAME",
+    "keyword": [
+      "doubleclick"
+    ],
+    "image_urls": [
+      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaQ2fFt68Y1Sw4yjbBjSfPa-LAlkIWZ1YZfeQm64-V0O6bZTKBgqnlTFTWeuCwODB12jBF-dsTd-rALVaXEcVg1yUPQl7w"
+    ]
+  },
+  {
+    "url": "https://weatherboy.com/",
+    "x": 43.5,
+    "y": 1746.1875,
+    "width": 737,
+    "height": 280,
+    "tag": "IFRAME",
+    "keyword": [
+      "doubleclick"
+    ],
+    "image_urls": [
+      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaTTSJaMgisuBRgs7mEpvZiV8LLVJRf3NO94hdHYZKnsx7eAKcFR6R3_6ukLtBdp0wUGuvYPjyqGzAVk6OjJ9zjdtXhOjA"
+    ]
+  },
+  {
+    "url": "https://weatherboy.com/",
+    "x": 822.5,
+    "y": 369.09375,
+    "width": 319,
     "height": 250,
-    "keywords": [
-      "syndication"
-    ],
     "tag": "IFRAME",
-    "image_urls": []
+    "keyword": [
+      "doubleclick"
+    ],
+    "image_urls": [
+      "https://tpc.googlesyndication.com/simgad/14460308994970197992?sqp=4sqPyQQ7QjkqNxABHQAAtEIgASgBMAk4A0DwkwlYAWBfcAKAAQGIAQGdAQAAgD-oAQGwAYCt4gS4AV_FAS2ynT4&rs=AOga4qlUrG1D5wAlzcJvQGlfvay_Lzeakw",
+      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaStdaM1OVSpPq9pGBvp7C2zddJcmuWagRyNtL5FUJMfyodESoY0QopdG1OUwS9wO-7vsZ4_zugctidiFy84zOJiCUXPpg"
+    ]
   },
   {
-    "url": "https://www.espncricinfo.com/",
-    "x": 784.5,
-    "y": 861.6875,
-    "width": 298,
-    "height": 50,
-    "keywords": [
-      "ads"
-    ],
-    "tag": "IFRAME",
-    "image_urls": []
-  },
-  {
-    "url": "https://www.espncricinfo.com/",
-    "x": 783.5,
-    "y": 927.6875,
-    "width": 300,
-    "height": 600,
-    "keywords": [
-      "ads"
-    ],
-    "tag": "IFRAME",
-    "image_urls": []
-  },
-  {
-    "url": "https://www.espncricinfo.com/",
-    "x": 80.5,
-    "y": 281,
-    "width": 1024,
-    "height": 278,
-    "keywords": [
+    "url": "https://weatherboy.com/",
+    "x": 846.046875,
+    "y": 909.6875,
+    "width": 60,
+    "height": 60,
+    "tag": "DIV",
+    "keyword": [
       "banner"
     ],
-    "tag": "DIV",
-    "image_urls": []
-  },
-  {
-    "url": "https://www.espncricinfo.com/",
-    "x": 782.5,
-    "y": 889.6875,
-    "width": 302,
-    "height": 70,
-    "keywords": [
-      "ads"
-    ],
-    "tag": "DIV",
-    "image_urls": []
-  },
-  {
-    "url": "https://www.espncricinfo.com/",
-    "x": 782.5,
-    "y": 975.6875,
-    "width": 302,
-    "height": 620,
-    "keywords": [
-      "ads"
-    ],
-    "tag": "DIV",
     "image_urls": []
   }
 ]

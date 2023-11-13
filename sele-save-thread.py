@@ -1,11 +1,8 @@
-import os
 from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import json
 from time import sleep
-import string
-import time 
 from urllib.parse import urlparse
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -15,10 +12,11 @@ import time
 import string
 import requests
 from selenium.common.exceptions import StaleElementReferenceException
+from requests.exceptions import RequestException
+# import threading
+import csv
+import concurrent.futures
 from ad_servers_list import known_ad_servers
-
-
-
 
 def domain_in_ad_servers(url, ad_servers):
     parsed_url = urlparse(url)
@@ -26,14 +24,18 @@ def domain_in_ad_servers(url, ad_servers):
     return any(ad_server in domain for ad_server in ad_servers)
 
 
+def read_urls_from_csv(file_path):
+    with open(file_path, newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        return [row[0] for row in reader]
+
+
 def scroll_to_bottom(driver, step_size=100, delay=0.5):
     last_height = driver.execute_script("return document.body.scrollHeight")
 
     while True:
-        # Scroll down by `step_size`
+        
         driver.execute_script(f"window.scrollBy(0, {step_size});")
-
-        # Wait for page to load
         sleep(delay)
 
         # Calculate new scroll height and compare with last scroll height
@@ -90,12 +92,9 @@ def is_descendant(child_element, parent_elements, driver):
                     return True
         return False
     except StaleElementReferenceException:
-        # Re-find the child_element and try again, or handle it in another way
         return False
 
-import requests
-import time
-from requests.exceptions import RequestException
+
 
 def download_image(image_url, save_path, max_retries=5):
     if not domain_in_ad_servers(image_url, known_ad_servers):
@@ -140,19 +139,19 @@ def mark_and_log_ads(driver, save_path):
     for tag in ad_tags:
         elements = driver.find_elements(By.TAG_NAME, tag)
         for element in elements:
-            is_ad = False
-            # Check attributes and text to identify ads
-            for attribute in element.get_property('attributes'):
-                keyword_matches = [keyword for keyword in ad_keywords if keyword in attribute['value']]
-                if keyword_matches:
-                    is_ad = True
-                    break
+            try:
+                is_ad = False
+                # Check attributes and text to identify ads
+                for attribute in element.get_property('attributes'):
+                    keyword_matches = [keyword for keyword in ad_keywords if keyword in attribute['value']]
+                    if keyword_matches:
+                        is_ad = True
+                        break
 
-            if is_ad and not is_descendant(element, parent_ad_elements, driver):
+                if is_ad and not is_descendant(element, parent_ad_elements, driver):
                 # Highlight the ad
-                driver.execute_script("arguments[0].style.border='10px solid red'", element)
-                parent_ad_elements.append(element)
-
+                    driver.execute_script("arguments[0].style.border='10px solid red'", element)
+                    parent_ad_elements.append(element)
                 # Check if element is visible and has size
                 if element.is_displayed() and element.size['height'] > 0 and element.size['width'] > 0:
                     rect = element.rect
@@ -176,37 +175,64 @@ def mark_and_log_ads(driver, save_path):
                         image_urls = [img.get_attribute('src') for img in element.find_elements(By.TAG_NAME, 'img') if img.get_attribute('src')]
 
                     for i, img_url in enumerate(image_urls):
-                        image_filename = f"ad_{len(ads_data)}_{i}.png"
+                        image_filename = f"ad_{urlparse}_{len(ads_data)}_{element}_{tag}.png"
                         full_save_path = os.path.join(save_path, image_filename)
                         download_image(img_url, full_save_path)
 
                     position_data['image_urls'] = image_urls
                     ads_data.append(position_data)
+            except:
+                print("Element no longer in the DOM, skipping")
+                continue
+
 
     return ads_data
 
 
+def process_url(url, base_save_path):
+    driver = webdriver.Chrome()
 
-# Initialize the WebDriver
-driver = webdriver.Chrome()
+    # Create a unique save path for each URL
+    url_save_path = os.path.join(base_save_path, urlparse(url).netloc.replace('.', '_'))
+    os.makedirs(url_save_path, exist_ok=True)
 
-# Define your save path
-save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/data'  # Replace with your actual path
-os.makedirs(save_path, exist_ok=True)  # Create the directory if it does not exist
-
-# Process a list of URLs
-urls_to_process = ['https://weatherboy.com/']  # Your list of URLs
-all_ads_data = []
-
-for url in urls_to_process:
+    # Navigate to the URL
     driver.get(url)
-    sleep(5)  # Wait for initial page load
-    scroll_to_bottom(driver) 
-    ads_data = mark_and_log_ads(driver, save_path)
-    all_ads_data.extend(ads_data)
+    time.sleep(5)
+    scroll_to_bottom(driver)
 
-# Save the ad positions to a JSON file
-with open('ad_positions.json', 'w') as f:
-    json.dump(all_ads_data, f, indent=2)
+    # Process ads
+    ads_data = mark_and_log_ads(driver, url_save_path)
 
-driver.quit()
+    # Save the ad positions to a JSON file
+    with open(os.path.join(url_save_path, 'ad_positions.json'), 'w') as f:
+        json.dump(ads_data, f, indent=2)
+
+    driver.quit()
+
+def process_batch(urls, base_save_path, max_threads):
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_threads) as executor:
+        futures = [executor.submit(process_url, url, base_save_path) for url in urls]
+
+        # Wait for all threads in the batch to complete
+        for future in concurrent.futures.as_completed(futures):
+            future.result()  # This re-raises exceptions from the threads
+
+
+if __name__ == "__main__":
+
+    csv_file_path = 'urls.csv'
+    # Read URLs from the CSV file
+    urls_to_process = read_urls_from_csv(csv_file_path)
+
+    # save path
+    base_save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/data'
+    os.makedirs(base_save_path, exist_ok=True)
+
+    max_threads = 3
+
+    batch_size = 3  
+    for i in range(0, len(urls_to_process), batch_size):
+        batch_urls = urls_to_process[i:i + batch_size]
+        process_batch(batch_urls, base_save_path, max_threads)
+        time.sleep(2)
