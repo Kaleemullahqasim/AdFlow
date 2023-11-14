@@ -1,3 +1,4 @@
+import keyword
 import os
 from urllib.parse import urlparse
 from selenium import webdriver
@@ -5,7 +6,6 @@ from selenium.webdriver.common.by import By
 import json
 from time import sleep
 import string
-from selenium.webdriver.support import expected_conditions as EC
 import requests
 from selenium.common.exceptions import StaleElementReferenceException
 from ad_servers_list import known_ad_servers
@@ -13,7 +13,8 @@ import time
 from requests.exceptions import RequestException
 import csv 
 import concurrent.futures
-
+from ad_servers_list import known_ad_servers
+import base64
 
 def read_urls_from_csv(file_path):
     with open(file_path, newline='') as csvfile:
@@ -24,7 +25,6 @@ def domain_in_ad_servers(url, ad_servers):
     parsed_url = urlparse(url)
     domain = parsed_url.netloc
     return any(ad_server in domain for ad_server in ad_servers)
-
 
 def scroll_to_bottom(driver, step_size=100, delay=0.5):
     last_height = driver.execute_script("return document.body.scrollHeight")
@@ -42,8 +42,6 @@ def scroll_to_bottom(driver, step_size=100, delay=0.5):
             break
         last_height = new_height
 
-
-
 def sanitize_filename(filename):
     """Sanitize the filename by removing invalid characters and ensuring it ends with .png"""
     valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
@@ -51,6 +49,7 @@ def sanitize_filename(filename):
     if not cleaned_filename.lower().endswith('.png'):
         cleaned_filename += '.png'
     return cleaned_filename
+
 
 def find_images_in_iframe(driver, iframe_element):
     """Find image URLs in an iframe."""
@@ -151,27 +150,27 @@ def is_descendant(child_element, parent_elements, driver):
         # Re-find the child_element and try again, or handle it in another way
         return False
 
+def download_image(image_url, save_path, is_from_ad_server, image_filename):
+    # Determine the subfolder based on the image source
+    subfolder = "from_adserver" if is_from_ad_server else "not_from_adserver"
+    full_save_path = os.path.join(save_path, subfolder, image_filename)
 
-def download_image(image_url, save_path, max_retries=5):
-    if not domain_in_ad_servers(image_url, known_ad_servers):
-        print(f"Skipping non-ad image: {image_url}")
-        return
-    for attempt in range(max_retries):
-        try:
-            response = requests.get(image_url)
-            if response.status_code == 200:
-                with open(save_path, 'wb') as file:
-                    file.write(response.content)
-                print(f"Image successfully downloaded to {save_path}")
-                return
-        except RequestException as e:
-            print(f"Request exception occurred (attempt {attempt + 1}/{max_retries}): {e}")
-            time.sleep(5)  # Delay before retrying
-    else:
-        print(f"Failed to download image after {max_retries} retries")
+    os.makedirs(os.path.join(save_path, subfolder), exist_ok=True)
 
+    try:
+        response = requests.get(image_url)
+        if response.status_code == 200:
+            with open(full_save_path, 'wb') as file:
+                file.write(response.content)
+            print(f"Image successfully downloaded to {full_save_path}")
+        else:
+            print(f"Failed to download {image_url}: Status code {response.status_code}")
+    except requests.RequestException as e:
+        print(f"Error downloading {image_url}: {e}")
 
 
+
+# Functions for finding images (find_images_in_iframe, find_images_in_div, etc.) remain unchanged
 
 def mark_and_log_ads(driver, save_path):
     ads_data = []
@@ -189,14 +188,12 @@ def mark_and_log_ads(driver, save_path):
         'anuncio', 'publicidad', 'patrocinado', 'Advertisement'
         'ad_hover_href'
     ]
-
     ad_tags = ['SCRIPT', 'IFRAME', 'DIV', 'IMG', 'INS', 'VIDEO', 'CANVAS', 'EMBED', 'OBJECT', 'SOURCE', 'SVG', 'TRACK']
 
     for tag in ad_tags:
         elements = driver.find_elements(By.TAG_NAME, tag)
         for element in elements:
             is_ad = False
-            # Check attributes and text to identify ads
             for attribute in element.get_property('attributes'):
                 keyword_matches = [keyword for keyword in ad_keywords if keyword in attribute['value']]
                 if keyword_matches:
@@ -204,11 +201,9 @@ def mark_and_log_ads(driver, save_path):
                     break
 
             if is_ad and not is_descendant(element, parent_ad_elements, driver):
-                # Highlight the ad
                 driver.execute_script("arguments[0].style.border='10px solid red'", element)
                 parent_ad_elements.append(element)
 
-                # Check if element is visible and has size
                 if element.is_displayed() and element.size['height'] > 0 and element.size['width'] > 0:
                     rect = element.rect
                     position_data = {
@@ -218,41 +213,22 @@ def mark_and_log_ads(driver, save_path):
                         "width": rect['width'],
                         "height": rect['height'],
                         "tag": tag,
-                        "keyword": keyword_matches[0] if keyword_matches else None, 
+                        "keyword": keyword_matches[0] if keyword_matches else None,
                         "image_urls": [],
-                    
                     }
 
-                   
-                    # Extracting image URLs
-                    if tag == "IFRAME":
-                        image_urls = find_images_in_iframe(driver, element)
-                    elif tag == "DIV":
-                        image_urls = find_images_in_div(driver, element)
-                    elif tag == "SVG":
-                        image_urls = find_images_in_svg(driver, element)
-                    elif tag == "EMBED" or tag == "OBJECT":
-                        image_urls = find_images_in_embed_and_object(driver, element, tag)
-                    elif tag == "CANVAS":
-                        # Placeholder for canvas - images in a canvas element are drawn via scripts and not directly accessible
-                        image_urls = []  # Placeholder as direct extraction is not feasible
-                    elif tag == "VIDEO":
-                        # Placeholder for video - you might want to extract poster images if available
-                        poster_url = element.get_attribute('poster')
-                        image_urls = [poster_url] if poster_url else []
-                    elif tag == "SOURCE":
-                        # Placeholder for source - used within picture or video, extraction depends on context
-                        srcset_urls = element.get_attribute('srcset')
-                        image_urls = srcset_urls.split(", ") if srcset_urls else []
-                    else:
-                        # Default case for other tags
-                        image_urls = [img.get_attribute('src') for img in element.find_elements(By.TAG_NAME, 'img') if img.get_attribute('src')]
-
+                    image_urls = find_images_in_iframe(driver, element) if tag == "IFRAME" else \
+                                 find_images_in_div(driver, element) if tag == "DIV" else \
+                                 find_images_in_svg(driver, element) if tag == "SVG" else \
+                                 find_images_in_embed_and_object(driver, element, tag) if tag in ["EMBED", "OBJECT"] else \
+                                 [element.get_attribute('poster')] if tag == "VIDEO" and element.get_attribute('poster') else \
+                                 element.get_attribute('srcset').split(", ") if tag == "SOURCE" and element.get_attribute('srcset') else \
+                                 [img.get_attribute('src') for img in element.find_elements(By.TAG_NAME, 'img') if img.get_attribute('src')]
 
                     for i, img_url in enumerate(image_urls):
                         image_filename = f"ad_{len(ads_data)}_{i}.png"
-                        full_save_path = os.path.join(save_path, image_filename)
-                        download_image(img_url, full_save_path)
+                        is_from_ad_server = domain_in_ad_servers(img_url, known_ad_servers)
+                        download_image(img_url, save_path, is_from_ad_server, image_filename)
 
                     position_data['image_urls'] = image_urls
                     ads_data.append(position_data)
@@ -279,6 +255,7 @@ def process_url(url, base_save_path):
         if 'driver' in locals():
             driver.quit()
 
+
 def process_batch(urls, base_save_path, max_threads):
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_threads) as executor:
         futures = [executor.submit(process_url, url, base_save_path) for url in urls]
@@ -287,7 +264,7 @@ def process_batch(urls, base_save_path, max_threads):
 
 if __name__ == "__main__":
     csv_file_path = 'urls.csv'  # Path to your CSV file
-    base_save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/data'
+    base_save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/test_with_ad_server/'
     os.makedirs(base_save_path, exist_ok=True)
 
     urls_to_process = read_urls_from_csv(csv_file_path)

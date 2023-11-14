@@ -1,45 +1,424 @@
 [
   {
-    "url": "https://weatherboy.com/",
-    "x": 43.5,
-    "y": 794.609375,
-    "width": 737,
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 242.5,
+    "y": 1113.1171875,
+    "width": 700,
     "height": 280,
-    "tag": "IFRAME",
-    "keyword": [
+    "keywords": [
+      "ads",
       "doubleclick"
     ],
-    "image_urls": [
-      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaRRYH8rBfV5W1MYK27AaE5kce4V570lPCaz8gsPQWJgeYx66xSLZhy2NZFDg3rOwUCdRExOvRAB4A7_kZ2LbfeeymbnBw"
-    ]
+    "tag": "IFRAME"
   },
   {
-    "url": "https://weatherboy.com/",
-    "x": 43.5,
-    "y": 1746.1875,
-    "width": 737,
-    "height": 280,
-    "tag": "IFRAME",
-    "keyword": [
-      "doubleclick"
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 0,
+    "y": 13019.6171875,
+    "width": 1185,
+    "height": 220,
+    "keywords": [
+      "newsletter"
     ],
-    "image_urls": [
-      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaTNHnrmqHO0zEeZtYZWwI5cYdtZM8qOaeZzd7jo7BI3lDvUhqfw_qfJMb0AUZIlKbll9tk47kEoe132EFaF1rLJYVt5JA"
-    ]
+    "tag": "DIV"
   },
   {
-    "url": "https://weatherboy.com/",
-    "x": 822.5,
-    "y": 369.09375,
-    "width": 319,
-    "height": 250,
-    "tag": "IFRAME",
-    "keyword": [
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 242.5,
+    "y": 468.46875,
+    "width": 700,
+    "height": 473,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 2333.5078125,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 3221.3984375,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 4064.4921875,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 4981.1796875,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 5881.8671875,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 6735.7578125,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 7589.6484375,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 8443.5390625,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 37.5,
+    "y": 12695.84375,
+    "width": 255,
+    "height": 170,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 322.5,
+    "y": 12695.84375,
+    "width": 255,
+    "height": 170,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 607.5,
+    "y": 12695.84375,
+    "width": 255,
+    "height": 170,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 892.5,
+    "y": 12695.84375,
+    "width": 255,
+    "height": 170,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 242.5,
+    "y": 1113.1171875,
+    "width": 700,
+    "height": 280,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "INS"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 242.5,
+    "y": 11748.8359375,
+    "width": 700,
+    "height": 280,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "INS"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 0,
+    "y": 11899.5,
+    "width": 1185,
+    "height": 129,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "INS"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 242.5,
+    "y": 1113.1171875,
+    "width": 700,
+    "height": 280,
+    "keywords": [
+      "ads",
       "doubleclick"
     ],
-    "image_urls": [
-      "https://tpc.googlesyndication.com/simgad/14460308994970197992?sqp=4sqPyQQ7QjkqNxABHQAAtEIgASgBMAk4A0DwkwlYAWBfcAKAAQGIAQGdAQAAgD-oAQGwAYCt4gS4AV_FAS2ynT4&rs=AOga4qlUrG1D5wAlzcJvQGlfvay_Lzeakw",
-      "https://www.google.com/ads/measurement/l?ebcid=ALh7CaQGzCThcKskJp1esBF_umAp24PkA4_Tp1T9NcM6JtI6qIf8j2MAR_jh5Oo__wS3ohnmVSZT70_r_DWqJClufIGyQiuZFA"
-    ]
+    "tag": "IFRAME"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 242.5,
+    "y": 11748.8359375,
+    "width": 700,
+    "height": 280,
+    "keywords": [
+      "ads",
+      "doubleclick"
+    ],
+    "tag": "IFRAME"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 90,
+    "y": 11904.5,
+    "width": 1005,
+    "height": 124,
+    "keywords": [
+      "ads",
+      "doubleclick"
+    ],
+    "tag": "IFRAME"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 0,
+    "y": 13030.2421875,
+    "width": 1185,
+    "height": 220,
+    "keywords": [
+      "newsletter"
+    ],
+    "tag": "DIV"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 242.5,
+    "y": 468.46875,
+    "width": 700,
+    "height": 473,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 2333.5078125,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 3221.3984375,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 4064.4921875,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 4981.1796875,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 5881.8671875,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 6735.7578125,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 7589.6484375,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 272.5,
+    "y": 8443.5390625,
+    "width": 640,
+    "height": 408,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 37.5,
+    "y": 12695.84375,
+    "width": 255,
+    "height": 170,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 322.5,
+    "y": 12695.84375,
+    "width": 255,
+    "height": 170,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 607.5,
+    "y": 12695.84375,
+    "width": 255,
+    "height": 170,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 892.5,
+    "y": 12695.84375,
+    "width": 255,
+    "height": 170,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "IMG"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 242.5,
+    "y": 1113.1171875,
+    "width": 700,
+    "height": 280,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "INS"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 242.5,
+    "y": 11748.8359375,
+    "width": 700,
+    "height": 280,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "INS"
+  },
+  {
+    "url": "https://tweaklibrary.com/image-downloader-extensions-for-chrome/#google_vignette",
+    "x": 0,
+    "y": 11899.5,
+    "width": 1185,
+    "height": 129,
+    "keywords": [
+      "ads"
+    ],
+    "tag": "INS"
   }
 ]
