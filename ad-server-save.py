@@ -234,7 +234,7 @@ def mark_and_log_ads(driver, save_path):
                     elif tag == "EMBED" or tag == "OBJECT":
                         image_urls = find_images_in_embed_and_object(driver, element, tag)
                     elif tag == "CANVAS":
-                        # Placeholder for canvas - images in a canvas element are drawn via scripts and not directly accessible
+                        
                         image_urls = []  # Placeholder as direct extraction is not feasible
                     elif tag == "VIDEO":
                         # Placeholder for video - you might want to extract poster images if available
