@@ -3,9 +3,24 @@ from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import json
-from time import sleep
 import string
 import time 
+from ad_servers_list import known_ad_servers
+import csv 
+import os
+import threading
+from selenium import webdriver
+from selenium.common.exceptions import StaleElementReferenceException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
+
+
+BATCH_SIZE = 10
+THREAD_COUNT = 15
 
 def sanitize_filename(filename):
     """Sanitize the filename by removing invalid characters and ensuring it ends with .png"""
@@ -15,15 +30,22 @@ def sanitize_filename(filename):
         cleaned_filename += '.png'
     return cleaned_filename
 
+def is_known_ad_server(url):
+    for ad_server in known_ad_servers:
+        if ad_server in url:
+            return True
+    return False
+
+
 ad_keywords = [
         ' ad ', 'ads', 'advert', 'advertisement', 'sponsored',
         'banner', 'promoted', 'promotion', 'doubleclick',
-        'affiliates', 'placements', 'taboola', 'outbrain',
+        'affiliates', 'placements', 'outbrain',
         'monetization', 'syndication', 'ppc', 'cpm', 'cpc',
         'interstitial', 'preroll', 'postroll', 'midroll',
         'media.net', 'AdSense', 'revcontent', 'buysellads',
         'popunder', 'pop-up', 'pop-over', 'skyscraper',
-        'sidebar', 'leaderboard', 'sticky', 'newsletter',
+        'sidebar', 'leaderboard', 'newsletter',
         '广告', '推广', '赞助',
         'anuncio', 'publicidad', 'patrocinado',
         'ad_hover_href'
@@ -57,7 +79,7 @@ def mark_and_log_ads(driver, save_path):
 
                         # Get and log the ad's position
                         rect = element.rect
-                        if rect['x'] > 0 and rect['y'] > 0 and rect['width'] > 0 and rect['height'] > 0:
+                        if rect['x'] > 0 and rect['y'] > 0 and rect['width'] > 20 and rect['height'] > 20:
                             position_data = {
                                 "url": driver.current_url,
                                 "x": rect['x'],
@@ -65,36 +87,90 @@ def mark_and_log_ads(driver, save_path):
                                 "width": rect['width'],
                                 "height": rect['height'],
                                 "keywords": keyword_matches,
-                                "tag": tag
-                            }
-                            ads_data.append(position_data)
+                                "child-tag": tag,
+                 
+                                
+                                "parent": {
+                                    "parent-tag": element.find_element(By.XPATH, './ancestor::*[1]').tag_name,
+                                    "id": element.find_element(By.XPATH, './ancestor::*[1]').get_attribute('id'),
+                                    "class": element.find_element(By.XPATH, './ancestor::*[1]').get_attribute('class'),
+                                    "is_displayed": element.find_element(By.XPATH, './ancestor::*[1]').is_displayed(),
+                                    #if there is a ad which is not photo but text can we extract the text from it
+                                    "text": element.find_element(By.XPATH, './ancestor::*[1]').text,
+                                },
 
-                            # Take a screenshot of the ad
-                            screenshot_filename = sanitize_filename(f"{urlparse(driver.current_url).netloc}_{tag}_{int(time.time())}.png")
-                            element.screenshot(os.path.join(save_path, screenshot_filename))
+                            },
+                            ads_data.append(position_data)
                         break  # No need to check other attributes if one matches
     return ads_data
 
 
-# Initialize the WebDriver
-driver = webdriver.Chrome()
 
-# Define your save path
-save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/data/'  # Replace with your actual path
-os.makedirs(save_path, exist_ok=True)  # Create the directory if it does not exist
+def read_urls_from_csv(file_path):
+    # Function to read URLs from a CSV file and return them as a list
+    urls = []
+    with open(file_path, mode='r', newline='', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            urls.append(row[0])  # Assuming URL is in the first column
+    return urls
 
-# Process a list of URLs
-urls_to_process = ['https://www.espncricinfo.com/']  # Your list of URLs
-all_ads_data = []
 
-for url in urls_to_process:
-    driver.get(url)
-    sleep(5)  # Wait for the page to load and ads to appear
-    ads_data = mark_and_log_ads(driver, save_path)
-    all_ads_data.extend(ads_data)
+def process_url_batch(url_batch, batch_id, save_path):
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Run Chrome in headless mode
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
 
-# Save the ad positions to a JSON file
-with open('ad_positions.json', 'w') as f:
-    json.dump(all_ads_data, f, indent=2)
+    driver = None
+    try:
+        driver = webdriver.Chrome(options=chrome_options)
+        ads_data = []
+        json_file_path = os.path.join(save_path, 'ad_positions.json')  # Define json_file_path variable
 
-driver.quit()
+        for url in url_batch:
+            driver.get(url)
+            time.sleep(5)  # Wait for page load
+            batch_ads_data = mark_and_log_ads(driver, save_path)
+            ads_data.extend(batch_ads_data)
+
+            # Save to JSON after processing each URL
+            with open(json_file_path, 'w') as f:
+                json.dump(ads_data, f, indent=2)
+
+        return ads_data
+    except Exception as e:
+        print(f"Error processing batch {batch_id}: {e}")
+        return []
+    finally:
+        if driver:
+            driver.quit()
+def main():
+    urls = read_urls_from_csv('urls.csv')
+    save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/data/20231118'
+    os.makedirs(save_path, exist_ok=True)
+    json_file_path = os.path.join(save_path, 'ad_positions.json')
+
+    url_batches = [urls[i:i + BATCH_SIZE] for i in range(0, len(urls), BATCH_SIZE)]
+
+    threads = []
+    all_ads_data = []
+
+    def thread_function(batch, batch_id):
+        ads_data = process_url_batch(batch, batch_id, save_path)
+        all_ads_data.extend(ads_data)
+
+    for i, batch in enumerate(url_batches):
+        thread = threading.Thread(target=thread_function, args=(batch, i))
+        print(f"Starting thread {i}")
+        threads.append(thread)
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+
+    with open('ad_positions-11.json', 'w') as f:
+        json.dump(all_ads_data, f, indent=2)
+
+if __name__ == "__main__":
+    main()

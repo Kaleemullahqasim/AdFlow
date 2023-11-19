@@ -1,0 +1,142 @@
+[
+  [
+    {
+      "url": "https://weatherboy.com/",
+      "x": 51.21875,
+      "y": 407.3046875,
+      "width": 690,
+      "height": 382,
+      "keywords": [
+        "ads"
+      ],
+      "child-tag": "IMG",
+      "parent": {
+        "parent-tag": "a",
+        "id": "",
+        "class": "",
+        "is_displayed": true,
+        "text": ""
+      }
+    }
+  ],
+  [
+    {
+      "url": "https://weatherboy.com/",
+      "x": 53.703125,
+      "y": 952.8984375,
+      "width": 314,
+      "height": 121,
+      "keywords": [
+        "ads"
+      ],
+      "child-tag": "IMG",
+      "parent": {
+        "parent-tag": "a",
+        "id": "",
+        "class": "alignnone",
+        "is_displayed": true,
+        "text": ""
+      }
+    }
+  ],
+  [
+    {
+      "url": "https://weatherboy.com/",
+      "x": 381.375,
+      "y": 952.8984375,
+      "width": 314,
+      "height": 121,
+      "keywords": [
+        "ads"
+      ],
+      "child-tag": "IMG",
+      "parent": {
+        "parent-tag": "a",
+        "id": "",
+        "class": "alignnone",
+        "is_displayed": true,
+        "text": ""
+      }
+    }
+  ],
+  [
+    {
+      "url": "https://weatherboy.com/",
+      "x": 53.703125,
+      "y": 1199.8984375,
+      "width": 314,
+      "height": 121,
+      "keywords": [
+        "ads"
+      ],
+      "child-tag": "IMG",
+      "parent": {
+        "parent-tag": "a",
+        "id": "",
+        "class": "alignnone",
+        "is_displayed": true,
+        "text": ""
+      }
+    }
+  ],
+  [
+    {
+      "url": "https://weatherboy.com/",
+      "x": 381.375,
+      "y": 1199.8984375,
+      "width": 314,
+      "height": 121,
+      "keywords": [
+        "ads"
+      ],
+      "child-tag": "IMG",
+      "parent": {
+        "parent-tag": "a",
+        "id": "",
+        "class": "alignnone",
+        "is_displayed": true,
+        "text": ""
+      }
+    }
+  ],
+  [
+    {
+      "url": "https://weatherboy.com/",
+      "x": 53.703125,
+      "y": 1446.8984375,
+      "width": 314,
+      "height": 121,
+      "keywords": [
+        "ads"
+      ],
+      "child-tag": "IMG",
+      "parent": {
+        "parent-tag": "a",
+        "id": "",
+        "class": "alignnone",
+        "is_displayed": true,
+        "text": ""
+      }
+    }
+  ],
+  [
+    {
+      "url": "https://weatherboy.com/",
+      "x": 381.375,
+      "y": 1446.8984375,
+      "width": 314,
+      "height": 121,
+      "keywords": [
+        "ads"
+      ],
+      "child-tag": "IMG",
+      "parent": {
+        "parent-tag": "a",
+        "id": "",
+        "class": "alignnone",
+        "is_displayed": true,
+        "text": ""
+      }
+    }
+  ]
+]
