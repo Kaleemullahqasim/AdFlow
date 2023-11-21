@@ -1,5 +1,4 @@
 import os
-from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import json
@@ -10,12 +9,6 @@ import csv
 import os
 import threading
 from selenium import webdriver
-from selenium.common.exceptions import StaleElementReferenceException
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 
 
@@ -65,7 +58,6 @@ def is_descendant(child_element, parent_elements):
 def mark_and_log_ads(driver, save_path):
     ads_data = []
     parent_ad_elements = []  # List to keep track of parent ad elements
-
     for tag in ad_tags:
         elements = driver.find_elements(By.TAG_NAME, tag)
         for element in elements:
@@ -98,7 +90,6 @@ def mark_and_log_ads(driver, save_path):
                                     #if there is a ad which is not photo but text can we extract the text from it
                                     "text": element.find_element(By.XPATH, './ancestor::*[1]').text,
                                 },
-
                             },
                             ads_data.append(position_data)
                         break  # No need to check other attributes if one matches
