@@ -37,8 +37,6 @@ def scroll_to_bottom(driver, step_size=100, delay=0.5):
         
         driver.execute_script(f"window.scrollBy(0, {step_size});")
         sleep(delay)
-
-        # Calculate new scroll height and compare with last scroll height
         new_height = driver.execute_script("return document.body.scrollHeight")
         if new_height == last_height:
             break
