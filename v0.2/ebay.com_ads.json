@@ -1,0 +1,132 @@
+[
+    {
+        "url": "https://ebay.com",
+        "tag": "SCRIPT",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 5232,
+            "height": 1668
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 800,
+            "height": 97
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 800,
+            "height": 97
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 97,
+            "width": 800,
+            "height": 310
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 109,
+            "width": 800,
+            "height": 34
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 800,
+            "height": 576
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 406.65625,
+            "width": 800,
+            "height": 190
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 417.65625,
+            "width": 800,
+            "height": 179
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 935,
+            "height": 344
+        }
+    },
+    {
+        "url": "https://ebay.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 596.65625,
+            "width": 800,
+            "height": 0
+        }
+    }
+]

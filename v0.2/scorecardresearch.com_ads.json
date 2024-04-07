@@ -1,0 +1,62 @@
+[
+    {
+        "url": "https://scorecardresearch.com",
+        "tag": "SCRIPT",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+        }
+    },
+    {
+        "url": "https://scorecardresearch.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 785,
+            "height": 745
+        }
+    },
+    {
+        "url": "https://scorecardresearch.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 141,
+            "width": 1043,
+            "height": 604
+        }
+    },
+    {
+        "url": "https://scorecardresearch.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 171,
+            "width": 1043,
+            "height": 574
+        }
+    },
+    {
+        "url": "https://scorecardresearch.com",
+        "tag": "DIV",
+        "position": {
+            "x": 54,
+            "y": 258.5,
+            "width": 967,
+            "height": 156
+        }
+    },
+    {
+        "url": "https://scorecardresearch.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 731,
+            "height": 90
+        }
+    }
+]

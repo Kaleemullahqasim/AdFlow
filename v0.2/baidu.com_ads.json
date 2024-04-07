@@ -1,0 +1,152 @@
+[
+    {
+        "url": "https://baidu.com",
+        "tag": "SCRIPT",
+        "position": {
+            "x": 61,
+            "y": 0,
+            "width": 911,
+            "height": 266
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "SCRIPT",
+        "position": {
+            "x": 61,
+            "y": 0,
+            "width": 2086,
+            "height": 392
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 1250,
+            "height": 600
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 1250,
+            "height": 600
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 491,
+            "height": 60
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 441.3828125,
+            "y": 19,
+            "width": 26,
+            "height": 42
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 61,
+            "y": 0,
+            "width": 228,
+            "height": 298
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 61,
+            "y": 0,
+            "width": 0,
+            "height": 0
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 61,
+            "y": 0,
+            "width": 0,
+            "height": 0
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 61,
+            "y": 545,
+            "width": 785,
+            "height": 40
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 78,
+            "y": 546,
+            "width": 751,
+            "height": 41
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 785.4921875,
+            "y": 546.5,
+            "width": 20,
+            "height": 40
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 61,
+            "y": 0,
+            "width": 468,
+            "height": 196
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 61,
+            "y": 0,
+            "width": 0,
+            "height": 0
+        }
+    },
+    {
+        "url": "https://baidu.com",
+        "tag": "DIV",
+        "position": {
+            "x": 61,
+            "y": 0,
+            "width": 0,
+            "height": 0
+        }
+    }
+]

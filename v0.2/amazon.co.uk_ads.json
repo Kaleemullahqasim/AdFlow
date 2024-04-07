@@ -1,0 +1,22 @@
+[
+    {
+        "url": "https://amazon.co.uk",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 785,
+            "height": 707
+        }
+    },
+    {
+        "url": "https://amazon.co.uk",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 647.09375,
+            "width": 785,
+            "height": 16
+        }
+    }
+]

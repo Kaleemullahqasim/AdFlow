@@ -11,6 +11,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import StaleElementReferenceException
 
 
+
 # def scroll_incrementally(driver, increments=10):
 #     """Scroll the page incrementally to load ads more naturally."""
 #     total_height = driver.execute_script("return document.body.scrollHeight")
@@ -119,8 +120,10 @@ def scroll_and_capture_ads(driver, save_path):
 
     return all_ads_data
 
-# Initialize the WebDriver
-driver = webdriver.Chrome()
+# Initialize the WebDriver with headless option
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+driver = webdriver.Chrome(options=options)
 save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/data/'
 os.makedirs(save_path, exist_ok=True)
 

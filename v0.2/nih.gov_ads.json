@@ -1,0 +1,52 @@
+[
+    {
+        "url": "https://nih.gov",
+        "tag": "SCRIPT",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+        }
+    },
+    {
+        "url": "https://nih.gov",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 785,
+            "height": 2670
+        }
+    },
+    {
+        "url": "https://nih.gov",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 785,
+            "height": 2670
+        }
+    },
+    {
+        "url": "https://nih.gov",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 30,
+            "width": 785,
+            "height": 91
+        }
+    },
+    {
+        "url": "https://nih.gov",
+        "tag": "DIV",
+        "position": {
+            "x": 21.59375,
+            "y": 54,
+            "width": 742,
+            "height": 67
+        }
+    }
+]

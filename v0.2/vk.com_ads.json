@@ -1,0 +1,82 @@
+[
+    {
+        "url": "https://vk.com",
+        "tag": "SCRIPT",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+        }
+    },
+    {
+        "url": "https://vk.com",
+        "tag": "SCRIPT",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+        }
+    },
+    {
+        "url": "https://vk.com",
+        "tag": "SCRIPT",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 46062,
+            "height": 1230
+        }
+    },
+    {
+        "url": "https://vk.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 785,
+            "height": 782
+        }
+    },
+    {
+        "url": "https://vk.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 785,
+            "height": 782
+        }
+    },
+    {
+        "url": "https://vk.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 960,
+            "height": 782
+        }
+    },
+    {
+        "url": "https://vk.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 990,
+            "height": 782
+        }
+    },
+    {
+        "url": "https://vk.com",
+        "tag": "DIV",
+        "position": {
+            "x": 0,
+            "y": 0,
+            "width": 149,
+            "height": 398
+        }
+    }
+]
