@@ -1,6 +1,6 @@
 # Analysis of Advertisement Positions
 
-This repository contains an analysis of advertisement positions on web pages. The study uses various data visualization techniques to represent advertisements' density, distribution, and characteristics.
+This repository contains an analysis of advertisement positions on web pages as part of the research paper AdFlow. The study uses various data visualization techniques to represent advertisements' density, distribution, and characteristics.
 
 ## Visualizations
 
