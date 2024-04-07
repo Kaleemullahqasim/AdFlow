@@ -168,6 +168,7 @@ def scroll_and_capture_ads(driver, url):
 
 
 
+
 def process_url(url):
     """
     Processes a single URL for ad data collection using a headless WebDriver instance.
