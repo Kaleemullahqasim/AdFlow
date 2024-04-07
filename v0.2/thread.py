@@ -225,15 +225,15 @@ if __name__ == "__main__":
     # Read URLs from the CSV file
     urls_to_process = read_urls_from_csv(csv_file_path)
     # 10 URLs to process for testing
-    urls_to_process = urls_to_process[:10]
+    urls_to_process = urls_to_process[:30]
 
     # save path
     base_save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/data'
     os.makedirs(base_save_path, exist_ok=True)
 
-    max_threads = 1
+    max_threads = 3
 
-    batch_size = 1
+    batch_size = 3
     for i in range(0, len(urls_to_process), batch_size):
         batch_urls = urls_to_process[i:i + batch_size]
         process_batch(batch_urls, base_save_path, max_threads)
