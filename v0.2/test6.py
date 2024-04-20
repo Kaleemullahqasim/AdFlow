@@ -14,7 +14,7 @@ import json
 import pandas as pd
 import concurrent.futures
 from tqdm import tqdm
-
+from ad_servers_list import known_ad_servers
 
 ad_keywords = [
         ' ad ', 'ads', 'advert', 'advertisement', 'sponsored',
@@ -31,7 +31,7 @@ ad_keywords = [
     ]
 
 
-ad_tags = ['SCRIPT', 'IFRAME', 'DIV', 'IMG', 'INS', 'VIDEO', 'CANVAS', 'EMBED', 'OBJECT', 'SOURCE', 'SVG', 'TRACK',]
+ad_tags = ['SCRIPT', 'IFRAME', 'DIV', 'IMG', 'INS', 'VIDEO']
 
 
 def is_descendant(driver, child_element, parent_elements):
