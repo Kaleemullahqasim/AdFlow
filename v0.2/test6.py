@@ -95,60 +95,6 @@ def mark_and_log_ads_in_viewport(driver):
     return ads_data
 
 
-# def mark_and_log_ads_in_viewport(driver, save_path):
-#     ads_data = []
-#     parent_ad_elements = []  # Keep track of parent ad elements
-
-#     for tag in ad_tags:
-#         elements = driver.find_elements(By.TAG_NAME, tag)
-#         for element in elements:
-#             try:
-#                 for attribute in element.get_property('attributes'):
-#                     keyword_matches = [keyword for keyword in ad_keywords if keyword in attribute['value']]
-#                     if keyword_matches and element.is_displayed():
-#                         original_style = driver.execute_script("var element = arguments[0]; var originalStyle = element.getAttribute('style'); element.style.border='10px solid red'; return originalStyle;", element)
-#                         parent_ad_elements.append(element)
-
-#                         rect = element.rect
-#                         position_data = {
-#                             "url": driver.current_url,
-#                             "x": rect['x'],
-#                             "y": rect['y'],
-#                             "width": rect['width'],
-#                             "height": rect['height'],
-#                             "keywords": keyword_matches,
-#                             "tag": tag
-#                         }
-#                         ads_data.append(position_data)
-
-#                         driver.execute_script("arguments[0].setAttribute('style', arguments[1])", element, original_style)
-#                         break  
-#             except StaleElementReferenceException:
-#                 continue
-
-#     return ads_data
-
-# def scroll_and_capture_ads(driver, url):
-#     """
-#     Modified function to accept a URL and use a WebDriver instance to scroll through
-#     the page and capture ads data.
-#     """
-#     driver.get(url)
-#     sleep(5)  # Wait for the initial page to load
-#     all_ads_data = []
-#     last_height = driver.execute_script("return document.body.scrollHeight")
-#     while True:
-#         driver.execute_script("window.scrollBy(0, window.innerHeight);")
-#         sleep(2)  # Wait for the page to load after scrolling
-#         ads_data = mark_and_log_ads_in_viewport(driver, url)  # Pass URL instead of save_path
-#         all_ads_data.extend(ads_data)
-#         new_height = driver.execute_script("return document.body.scrollHeight")
-#         if new_height == last_height:
-#             break  # Break if we've reached the bottom
-#         last_height = new_height
-#     return all_ads_data
-
-
 def scroll_and_capture_ads(driver, url):
     driver.get(url)
     sleep(5)  # Wait for the initial page to load
@@ -167,8 +113,6 @@ def scroll_and_capture_ads(driver, url):
 
 
 
-
-
 def process_url(url):
     """
     Processes a single URL for ad data collection using a headless WebDriver instance.
@@ -178,37 +122,6 @@ def process_url(url):
     with webdriver.Chrome(options=options) as driver:
         ad_data = scroll_and_capture_ads(driver, url)
         return ad_data
-
-# def main(urls_to_process, save_path):
-#     """
-#     Processes a list of URLs concurrently using multithreading and saves the collected ad data.
-#     """
-#     os.makedirs(save_path, exist_ok=True)
-#     all_ads_data = []
-    
-#     with concurrent.futures.ThreadPoolExecutor() as executor:
-#         # Map the process_url function over the URLs to process them concurrently
-#         future_to_url = [executor.submit(process_url, url) for url in urls_to_process]
-#         for future in concurrent.futures.as_completed(future_to_url):
-#             try:
-#                 ad_data = future.result()
-#                 all_ads_data.extend(ad_data)
-#             except Exception as exc:
-#                 print(f'An exception occurred: {exc}')
-    
-#     # Save the aggregated data from all URLs after processing
-#     if all_ads_data:
-#         with open(os.path.join(save_path, 'ad_positions.json'), 'w') as f:
-#             json.dump(all_ads_data, f, indent=2)
-#     else:
-#         print("No ad data was collected.")
-
-# if __name__ == '__main__':
-#     urls_csv_path = '/Users/kaleemullahqasim/Documents/GitHub/AdIdentifer_Downloader/v0.2/200_only_ad.csv'
-#     urls_to_process = pd.read_csv(urls_csv_path)['url'].tolist()[:30] 
-#     save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/data/'
-#     main(urls_to_process, save_path)
-
 
 def main(urls_to_process, save_path):
     """
