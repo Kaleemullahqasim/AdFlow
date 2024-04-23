@@ -43,7 +43,7 @@ ad_keywords = [
     ]
 
 
-ad_tags = ['SCRIPT', 'IFRAME', 'DIV', 'IMG', 'INS', 'VIDEO', 'CANVAS', 'EMBED', 'OBJECT', 'SOURCE', 'SVG', 'TRACK',]
+ad_tags = ['SCRIPT', 'IFRAME', 'DIV', 'IMG', 'INS', 'VIDEO']
 
 
 def is_descendant(driver, child_element, parent_elements):
@@ -123,6 +123,9 @@ def scroll_and_capture_ads(driver, save_path):
 # Initialize the WebDriver with headless option
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
+options.add_argument('--ignore-certificate-errors')
+# options.add_argument('--no-sandbox')
+options.add_argument('--window-size=1920,1080')
 driver = webdriver.Chrome(options=options)
 save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/data/'
 os.makedirs(save_path, exist_ok=True)
