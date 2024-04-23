@@ -135,7 +135,7 @@ for url in urls_to_process:
     all_ads_data = scroll_and_capture_ads(driver, save_path)
 
 # Save the ad positions to a JSON file
-with open('ad_positions.json', 'w') as f:
+with open('test.json', 'w') as f:
     json.dump(all_ads_data, f, indent=2)
 
 driver.quit()
