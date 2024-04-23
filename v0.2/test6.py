@@ -106,10 +106,10 @@ def main():
     os.makedirs(save_path, exist_ok=True)
     df = pd.read_csv('/Users/kaleemullahqasim/Documents/GitHub/AdIdentifer_Downloader/v0.2/200_request_code.csv')
     urls = df['url'].tolist()
-    urls = urls[:100]
+    urls = urls[:1000]
     all_ads_data = []
 
-    with ThreadPoolExecutor(max_workers=10) as executor:
+    with ThreadPoolExecutor(max_workers=20) as executor:
         futures = [executor.submit(process_url, url, save_path, all_ads_data) for url in urls]
         for future in tqdm(futures, total=len(urls)):
             future.result()
