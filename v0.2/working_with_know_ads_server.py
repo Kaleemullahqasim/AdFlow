@@ -15,11 +15,11 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import StaleElementReferenceException
 from requests.exceptions import RequestException
-# import threading
 import csv
 import concurrent.futures
 from ad_servers_list import known_ad_servers
 from selenium.common.exceptions import WebDriverException
+from tqdm import tqdm  # Import tqdm
 
 
 def domain_in_ad_servers(url, ad_servers):
@@ -28,24 +28,17 @@ def domain_in_ad_servers(url, ad_servers):
     return any(ad_server in domain for ad_server in ad_servers)
 
 
-def read_urls_from_csv(file_path):
-    with open(file_path, newline='') as csvfile:
-        reader = csv.reader(csvfile)
-        return [row[0] for row in reader]
 
-
-def scroll_to_bottom(driver, step_size=100, delay=0.5):
-    last_height = driver.execute_script("return document.body.scrollHeight")
-
-    while True:
-        
-        driver.execute_script(f"window.scrollBy(0, {step_size});")
-        sleep(delay)
-        new_height = driver.execute_script("return document.body.scrollHeight")
-        if new_height == last_height:
-            break
-        last_height = new_height
-
+def scroll_to_bottom(driver, pages=3):
+    import time
+    # Get the height of the window (viewport)
+    viewport_height = driver.execute_script("return window.innerHeight;")
+    # Scroll down three times the viewport height
+    for _ in range(pages):
+        # Scroll by one viewport height
+        driver.execute_script(f"window.scrollBy(0, {viewport_height});")
+        # Wait for 1 second to allow the page to load more content
+        time.sleep(1)
 
 def sanitize_filename(filename):
     """Sanitize the filename by removing invalid characters and ensuring it ends with .png"""
@@ -190,33 +183,31 @@ def process_url(url, base_save_path):
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     driver = webdriver.Chrome(options=options)
-
     try:
-        # Ensure URL is not None or malformed
         if not url or not urlparse(url).scheme:
             raise ValueError(f"Invalid URL: {url}")
-
+        print(f"Processing URL: {url}")
         url_save_path = os.path.join(base_save_path, urlparse(url).netloc.replace('.', '_'))
         os.makedirs(url_save_path, exist_ok=True)
         driver.get(url)
-        time.sleep(5)  # Allow time for the page to fully load
-        scroll_to_bottom(driver)
+        # Use WebDriverWait to ensure the initial page is loaded
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
+        # Scroll down 3 pages
+        scroll_to_bottom(driver, 3)
         ads_data = mark_and_log_ads(driver, url_save_path)
-
-        # Save the ad positions to a JSON file
-        with open(os.path.join(url_save_path, 'ad_positions.json'), 'w') as f:
-            json.dump(ads_data, f, indent=2)
+        if ads_data:
+            with open(os.path.join(url_save_path, 'ad_positions.json'), 'w') as f:
+                json.dump(ads_data, f, indent=2)
     except WebDriverException as e:
         print(f"WebDriver error with URL {url}: {str(e)}")
     except Exception as e:
         print(f"Error processing URL {url}: {str(e)}")
     finally:
         driver.quit()
+    print(f"Completed URL: {url}")
 
     return
 
-import csv
-from tqdm import tqdm  # Import tqdm
 
 def read_urls_from_csv(file_path):
     urls = []
@@ -236,16 +227,18 @@ def process_batch(urls, base_save_path, max_threads):
         for future in tqdm(concurrent.futures.as_completed(futures), total=len(futures), desc="Processing URLs"):
             future.result()  # This re-raises exceptions from the threads
 
+
+
 if __name__ == "__main__":
     csv_file_path = '/Users/kaleemullahqasim/Documents/GitHub/AdIdentifer_Downloader/v0.2/200_of_all_URLs.csv'
     urls_to_process = read_urls_from_csv(csv_file_path)
-    urls_to_process = urls_to_process[:20]
+    urls_to_process = urls_to_process[:200]
 
     base_save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/data'
     os.makedirs(base_save_path, exist_ok=True)
 
-    max_threads = 3
-    batch_size = 4
+    max_threads = 20
+    batch_size = 10
 
     for i in tqdm(range(0, len(urls_to_process), batch_size), desc="Batch Progress"):
         batch_urls = urls_to_process[i:i + batch_size]

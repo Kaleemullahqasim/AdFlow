@@ -51,7 +51,7 @@ def is_descendant(driver, child_element, parent_elements):
     
 def mark_and_log_ads_in_viewport(driver):
     ads_data = []
-    saved_ads_identifiers = set()  # To track unique ads
+    saved_ads_identifiers = set() 
     parent_ad_elements = []  # To track parent ad elements
 
     for tag in ad_tags:
@@ -77,6 +77,7 @@ def mark_and_log_ads_in_viewport(driver):
                                         "keywords": keyword_matches,
                                         "tag": tag
                                     }
+                                    print(position_data)
 
                                     # Check if this ad is a child of a saved parent ad
                                     is_child_of_saved_parent = False
@@ -150,7 +151,8 @@ def main(urls_to_process, save_path):
         print("No ad data was collected.")
 
 if __name__ == '__main__':
-    urls_csv_path = '/Users/kaleemullahqasim/Documents/GitHub/AdIdentifer_Downloader/v0.2/200_only_ad.csv'
-    urls_to_process = pd.read_csv(urls_csv_path)['url'].tolist()  
+    urls_csv_path = '/Users/kaleemullahqasim/Documents/GitHub/AdIdentifer_Downloader/v0.2/200_of_all_URLs.csv'
+    urls_to_process = pd.read_csv(urls_csv_path)['url'].tolist()   
+    urls_to_process = urls_to_process[:20]
     save_path = '/Users/kaleemullahqasim/Desktop/Prof Xiu Hai Tao/data/'
     main(urls_to_process, save_path)
