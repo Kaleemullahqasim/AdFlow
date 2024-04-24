@@ -6,9 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 import json
 from time import sleep
 import string
-import time
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import StaleElementReferenceException
+import time 
 
 
 
@@ -31,8 +31,8 @@ def sanitize_filename(filename):
 ad_keywords = [
         ' ad ', 'ads', 'advert', 'advertisement', 'sponsored',
         'banner', 'promoted', 'promotion', 'doubleclick',
-        'affiliates', 'placements', 'taboola', 'outbrain',
-        'monetization', 'syndication', 'ppc', 'cpm', 'cpc',
+        # 'affiliates', 'placements', 'taboola', 'outbrain',
+        # 'monetization', 'syndication', 'ppc', 'cpm', 'cpc',
         # 'interstitial', 'preroll', 'postroll', 'midroll',
         # 'media.net', 'AdSense', 'revcontent', 'buysellads',
         # 'popunder', 'pop-up', 'pop-over', 'skyscraper',
@@ -64,37 +64,73 @@ def is_descendant(driver, child_element, parent_elements):
 
 def mark_and_log_ads_in_viewport(driver, save_path):
     ads_data = []
-    parent_ad_elements = []  # Keep track of parent ad elements
+    parent_ad_elements = []
 
     for tag in ad_tags:
         elements = driver.find_elements(By.TAG_NAME, tag)
         for element in elements:
             try:
-                for attribute in element.get_property('attributes'):
-                    keyword_matches = [keyword for keyword in ad_keywords if keyword in attribute['value']]
-                    if keyword_matches and element.is_displayed():
-                        original_style = driver.execute_script("var element = arguments[0]; var originalStyle = element.getAttribute('style'); element.style.border='10px solid red'; return originalStyle;", element)
-                        parent_ad_elements.append(element)
+                # Filter out elements that are unlikely to be ads
+                if element.get_attribute('class') and 'ad' in element.get_attribute('class'):
+                    for attribute in element.get_property('attributes'):
+                        keyword_matches = [keyword for keyword in ad_keywords if keyword in attribute['value']]
+                        if keyword_matches and element.is_displayed():
+                            # Check if the element's parent or ancestor is already marked as an ad
+                            if element.tag_name == 'html':
+                                parent = None
+                            else:
+                                parent = element.find_element(By.XPATH, './parent::*')
+                            if parent is not None:
+                                if parent in parent_ad_elements:
+                                    continue
 
-                        rect = element.rect
-                        position_data = {
-                            "url": driver.current_url,
-                            "x": rect['x'],
-                            "y": rect['y'],
-                            "width": rect['width'],
-                            "height": rect['height'],
-                            "keywords": keyword_matches,
-                            "tag": tag
-                        }
-                        ads_data.append(position_data)
+                            # Check if the element contains ad-like text content
+                            text_content = element.get_attribute('textContent')
+                            if 'sponsored' in text_content.lower() or 'ad' in text_content.lower():
+                                continue
 
-                        # Remove the red border before taking the screenshot
-                        driver.execute_script("arguments[0].style.border='none'", element)
-                        screenshot_filename = sanitize_filename(f"{urlparse(driver.current_url).netloc}_{tag}_{int(time.time())}.png")
-                        element.screenshot(os.path.join(save_path, screenshot_filename))
-                        # Reapply the original style after taking the screenshot
-                        driver.execute_script("arguments[0].setAttribute('style', arguments[1])", element, original_style)
-                        break  # No need to check other attributes if one matches
+                            # Check if the element has ad-like attributes
+                            if element.get_attribute('data-ad-client') or element.get_attribute('data-ad-slot'):
+                                continue
+
+                            # Check if the element has ad-like styles
+                            styles = element.get_attribute('style')
+                            if 'display: inline-block' in styles or 'position: absolute' in styles:
+                                continue
+
+                            # Check if the element is positioned in a way that is common for ads
+                            rect = element.rect
+                            if rect['x'] < 100 or rect['y'] < 100 or rect['width'] > 500 or rect['height'] > 500:
+                                continue
+
+                            # Check if the element's parent or ancestors have ad-like characteristics
+                            parent = element.find_element(By.XPATH, './parent::*')
+                            if parent.get_attribute('class') and 'ad-container' in parent.get_attribute('class'):
+                                continue
+
+                            # If all filters pass, mark the element as an ad
+                            original_style = driver.execute_script("var element = arguments[0]; var originalStyle = element.getAttribute('style'); element.style.border='10px solid red'; return originalStyle;", element)
+                            parent_ad_elements.append(element)
+
+                            rect = element.rect
+                            position_data = {
+                                "url": driver.current_url,
+                                "x": rect['x'],
+                                "y": rect['y'],
+                                "width": rect['width'],
+                                "height": rect['height'],
+                                "keywords": keyword_matches,
+                                "tag": tag
+                            }
+                            ads_data.append(position_data)
+
+                            # Remove the red border before taking the screenshot
+                            driver.execute_script("arguments[0].style.border='none'", element)
+                            screenshot_filename = sanitize_filename(f"{urlparse(driver.current_url).netloc}_{tag}_{int(time.time())}.png")
+                            element.screenshot(os.path.join(save_path, screenshot_filename))
+                            # Reapply the original style after taking the screenshot
+                            driver.execute_script("arguments[0].setAttribute('style', arguments[1])", element, original_style)
+                            break  # No need to check other attributes if one matches
             except StaleElementReferenceException:
                 # Skip the current element if it becomes stale
                 continue
@@ -138,7 +174,7 @@ for url in urls_to_process:
     all_ads_data = scroll_and_capture_ads(driver, save_path)
 
 # Save the ad positions to a JSON file
-with open('test.json', 'w') as f:
+with open('test1.json', 'w') as f:
     json.dump(all_ads_data, f, indent=2)
 
 driver.quit()

@@ -28,7 +28,7 @@ def create_driver():
     return driver
 
 
-ad_tags = ['IFRAME', 'IMG', 'DIV', 'INS', 'SCRIPT' ,'VIDEO']  # Tags that are more likely to be ads
+ad_tags = ['IFRAME', 'IMG', 'DIV', 'INS', 'SCRIPT' ,'VIDEO'] 
 ad_attributes = [
     'data-ad-format',  # Google AdSense
     'data-ad-layout-key',  # Google AdSense
@@ -104,9 +104,9 @@ def main():
     os.makedirs(save_path, exist_ok=True)
     df = pd.read_csv(urls_csv_path)
     urls = df['url'].tolist()
-    urls = urls[1000:2000]
+    urls = urls[3000:-1]
 
-    num_drivers = 15
+    num_drivers = 25
     all_ads_data = []
     progress_bar = tqdm(total=len(urls), desc="Processing URLs", unit="url")
     lock = Lock()
@@ -124,7 +124,7 @@ def main():
                 progress_bar.update(1)  # Update the progress for each URL processed
 
     # Save the accumulated data once after all processing is done
-    with open(os.path.join(save_path, 'ads_data_1000_2000.json'), 'w') as f:
+    with open(os.path.join(save_path, 'ads_data_3000_1b.json'), 'w') as f:
         json.dump(all_ads_data, f, indent=4)
 
     # Clean up drivers and close progress bar
